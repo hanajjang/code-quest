@@ -1,0 +1,60 @@
+# .gitignore
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Debug
+.vercel
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.code-workspace
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Package manager lock files (선택사항 - 팀 프로젝트 시 제거)
+# package-lock.json
+# yarn.lock
