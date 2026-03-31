@@ -8,7 +8,7 @@ import { useUser } from '@/hooks/useUser';
 import { useFirestore } from '@/hooks/useFirestore';
 import Navbar from '@/components/Navbar';
 import Worldmap from '@/components/Worldmap';
-import { REGIONS, DEFAULT_STATS, LEVEL_ICONS, LEVEL_NAMES } from '@/lib/constants';
+import { REGIONS, LEVEL_ICONS, LEVEL_NAMES } from '@/lib/constants';
 import { Region } from '@/types';
 
 export default function Dashboard() {
