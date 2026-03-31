@@ -37,16 +37,15 @@ export default function Dashboard() {
         const progress = Math.round((completed / regionProjects.length) * 100);
 
         return {
-          ...region,
-          progress,
-          status: completed === regionProjects.length
-            ? 'completed'
-            : inProgress
-            ? 'in_progress'
-            : 'not_started',
-          projects: regionProjects.length > 0 ? regionProjects : region.projects,
-        };
-      });
+  ...region,
+  progress,
+  status: (completed === regionProjects.length
+    ? 'completed'
+    : inProgress
+    ? 'in_progress'
+    : 'locked') as 'completed' | 'in_progress' | 'locked',
+  projects: regionProjects.length > 0 ? regionProjects : region.projects,
+};
 
       setRegions(updatedRegions);
     };
