@@ -17,14 +17,12 @@ export default function Dashboard() {
   const [regions, setRegions] = useState<Region[]>(REGIONS);
   const firestore = useFirestore(user?.deviceId || '');
 
-  // Firestore에서 진행도 로드
   useEffect(() => {
     if (!user?.deviceId) return;
 
     const loadProgress = async () => {
       const projects = await firestore.loadAllProjects();
 
-      // 지역별 진행도 계산
       const updatedRegions = REGIONS.map((region) => {
         const regionProjects = projects.filter((p) =>
           region.projects.some((rp) => rp.id === p.id)
@@ -36,7 +34,7 @@ export default function Dashboard() {
         const inProgress = regionProjects.some((p) => p.status === 'in_progress');
         const progress = Math.round((completed / regionProjects.length) * 100);
 
-       return {
+        return {
           ...region,
           progress,
           status: (completed === regionProjects.length
@@ -44,8 +42,10 @@ export default function Dashboard() {
             : inProgress
             ? 'in_progress'
             : 'locked') as 'completed' | 'in_progress' | 'locked',
-          projects: regionProjects.length > 0 ? regionProjects : region.projects,
+          projects: regionProjects.length > 0 ? regionProjects : region.projects
         };
+      });
+
       setRegions(updatedRegions);
     };
 
@@ -73,7 +73,6 @@ export default function Dashboard() {
       <Navbar user={user} currentPage="dashboard" />
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-black">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          {/* 헤더: 사용자 정보 */}
           <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-lg p-6 mb-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -110,7 +109,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* 경험치 바 */}
             <div className="mt-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs text-slate-400">경험치</span>
@@ -127,7 +125,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* 스트릭 경고 */}
           {user.currentStreak === 0 && (
             <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4 mb-6 flex items-center gap-3">
               <span className="text-xl">⚠️</span>
@@ -142,13 +139,11 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* 월드맵 */}
           <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
             <h2 className="text-xl font-bold text-white mb-6">🗺️ 코드맵</h2>
             <Worldmap regions={regions} completedProjects={user.completedProjects} />
           </div>
 
-          {/* 다음 단계 추천 */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
